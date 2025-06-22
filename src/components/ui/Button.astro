@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { type VariantProps, tv } from "tailwind-variants";
 
 export const buttonVariants = tv({
-  base: "inline-flex items-center space-x-3 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500",
+  base: "inline-flex items-center gap-x-2 justify-center whitespace-nowrap rounded-md text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-1 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-700 focus-visible:ring-neutral-500",
   variants: {
     variant: {
       default:
@@ -36,14 +36,15 @@ type Variant = VariantProps<typeof buttonVariants>["variant"];
 type Size = VariantProps<typeof buttonVariants>["size"];
 
 interface Props {
+  id?: string;
   variant: Variant;
   size: Size;
   class: string;
 }
 
-const { variant, size, class: className } = Astro.props;
+const { variant, size, class: className, id } = Astro.props;
 ---
 
-<button class={cn(buttonVariants({ variant, size, className }))}>
+<button class={cn(buttonVariants({ variant, size, className }))} id={id}>
   <slot />
 </button>

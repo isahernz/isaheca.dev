@@ -1,16 +1,14 @@
 ---
-
+import MainLayout from "@/layouts/MainLayout.astro";
+import Bio from "@/components/sections/Bio.astro";
+import FeaturedProjects from "@/components/sections/FeaturedProjects.astro";
+import Experience from "@/components/sections/Experience.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="Brandon Hernández | Blog">
+  <div class="grid items-center gap-14 py-4 md:py-4">
+    <Bio />
+    <FeaturedProjects />
+    <Experience />
+  </div>
+</MainLayout>

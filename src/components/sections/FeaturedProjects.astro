@@ -1,0 +1,25 @@
+---
+import ProjectCard from "@/components/ProjectCard.astro";
+import { ArrowRight } from "@lucide/astro";
+import { projects } from "@/data/projects";
+---
+
+<section class="flex flex-col gap-y-4">
+  <div class="flex w-full items-center justify-between">
+    <h2 class="text-xl font-medium">Projects</h2>
+    <a
+      href="/projects"
+      class="group flex items-center space-x-2 text-sm font-medium text-neutral-500 duration-100 hover:text-black dark:text-neutral-400 dark:hover:text-white"
+    >
+      <span>More</span>
+      <ArrowRight
+        size={14}
+        stroke-width={2}
+        class="opacity-70 duration-200 group-hover:translate-x-[2px] group-hover:opacity-100"
+      />
+    </a>
+  </div>
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+    {projects.map(project => <ProjectCard {...project} />)}
+  </div>
+</section>

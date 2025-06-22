@@ -1,0 +1,33 @@
+---
+import SpotlightBadge from "@/components/ui/SpotlightBadge.astro";
+import Badge from "@/components/ui/Badge.astro";
+import type { Project } from "@/types/project";
+
+const { title, description, tags, icon, legend } = Astro.props as Project;
+---
+
+<article
+  class="relative flex flex-col gap-y-2 rounded-md border-[1px] border-neutral-300 px-3 py-4 shadow-sm dark:border-neutral-800"
+>
+  <div class="flex flex-col space-y-3">
+    <div class="flex w-full items-center justify-between">
+      <div class="flex items-center gap-x-3">
+        <img src={icon} alt={title} class="size-6" />
+        <h3 class="font-medium text-pretty">
+          {title}
+        </h3>
+      </div>
+      <SpotlightBadge label={legend} />
+    </div>
+    <p class="truncate text-sm dark:text-neutral-400">{description}</p>
+    <div class="no-scrollbar flex items-center gap-x-2 overflow-y-auto">
+      {
+        tags.map(({ name, icon: Icon }) => (
+          <Badge label={name}>
+            <Icon class="size-4" />
+          </Badge>
+        ))
+      }
+    </div>
+  </div>
+</article>

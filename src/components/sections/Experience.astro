@@ -1,0 +1,80 @@
+---
+import Button from "@/components/ui/Button.astro";
+import { myExperience } from "@/data/my-experience";
+import ArrowIcon from "@/icons/arrow.svg";
+import { formatDate } from "@/lib/format-date";
+import { cn } from "@/lib/utils";
+import { ArrowUpRight } from "@lucide/astro";
+---
+
+<section class="flex flex-col gap-y-4">
+  <h2 class="text-xl font-medium">Experience</h2>
+
+  <div id="experience-container" class="flex flex-col gap-y-4">
+    <ol class="relative space-y-6 border-s-2 border-neutral-300 dark:border-neutral-800">
+      {
+        myExperience.map((experience, index) => (
+          <li class={cn("experience-item ms-5 mt-1", index >= 1 && "hidden")} data-index={index}>
+            <div
+              class={cn(
+                "absolute -start-[6.5px] mt-2 h-3 w-3 rounded-full border border-neutral-400 bg-neutral-200 dark:border-neutral-600 dark:bg-neutral-800",
+              )}
+            />
+            <time class="mb-2 font-mono text-xs leading-none font-normal text-neutral-600 dark:text-neutral-400">
+              {formatDate(experience.startDate, experience.endDate)}
+            </time>
+            <div class="mt-2 flex flex-col space-y-0.5">
+              <h3 class="text-lg font-semibold tracking-tight text-gray-900 dark:text-white">{experience.role}</h3>
+              <a
+                href={experience.companyUrl}
+                target="_blank"
+                rel="noopener"
+                class="group flex w-max items-center text-sm text-pretty text-neutral-600 transition-colors duration-150 hover:text-black dark:border-neutral-800 dark:text-neutral-400 dark:hover:text-white"
+              >
+                <span>{experience.company}</span>
+                <ArrowUpRight class="ml-1 duration-150 group-hover:translate-x-[1.5px]" size={12} stroke-width={1.5} />
+              </a>
+            </div>
+            <p class="mt-3 text-sm text-pretty dark:text-neutral-400">{experience.aboutRole}</p>
+          </li>
+        ))
+      }
+    </ol>
+
+    {
+      myExperience.length > 1 && (
+        <Button variant="outline" size="sm" class="cursor-pointer self-center">
+          <span id="btn-text">Show More</span>
+          <ArrowIcon id="btn-icon" class="h-4 w-4" />
+        </Button>
+      )
+    }
+  </div>
+</section>
+
+<script>
+  const showMoreBtn = document.querySelector("button") as HTMLButtonElement;
+  const experienceItems = document.querySelectorAll(".experience-item") as NodeListOf<HTMLLIElement>;
+  const btnIcon = document.getElementById("btn-icon") as HTMLDivElement;
+
+  const btnText = document.getElementById("btn-text") as HTMLSpanElement;
+
+  let isExpanded = false;
+
+  showMoreBtn?.addEventListener("click", () => {
+    isExpanded = !isExpanded;
+
+    experienceItems.forEach((item, index) => {
+      if (index >= 1) {
+        if (isExpanded) {
+          item.classList.remove("hidden");
+        } else {
+          item.classList.add("hidden");
+        }
+      }
+    });
+
+    btnText.textContent = isExpanded ? "Show Less" : "Show More";
+    btnIcon.style.transform = isExpanded ? "rotate(180deg)" : "rotate(0deg)";
+  });
+</script>

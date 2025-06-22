@@ -1,5 +1,5 @@
 import GitHub from "@/icons/github.svg";
-import LinkedIn from "@/icons/linkedin.svg";
+import LinkedIn from "@/icons/linkedIn.svg";
 import X from "@/icons/x.svg";
 import type { Link } from "@/types/link";
 
